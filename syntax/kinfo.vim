@@ -30,7 +30,7 @@ highlight default link KronosInfoDone         Structure
 highlight default link KronosInfoDue          String
 highlight default link KronosInfoId           Identifier
 highlight default link KronosInfoKey          Comment
-highlight default link KronosInfoLastactive   String
+highlight default link KronosInfoLastActive   String
 highlight default link KronosInfoSeparator    VertSplit
 highlight default link KronosInfoTags         Tag
 highlight default link KronosInfoWorktime     String

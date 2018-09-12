@@ -13,7 +13,7 @@ let g:kronos_context   = get(g:, 'kronos_context'  , [])
 let g:kronos_hide_done = get(g:, 'kronos_hide_done', 1)
 let g:kronos_database  = get(
   \g:, 'kronos_database',
-  \resolve(s:root_dir . '/kronos.db'),
+  \resolve(s:root_dir . '/.database'),
 \)
 
 " ------------------------------------------------------------------ # Command #

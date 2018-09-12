@@ -39,7 +39,7 @@ function! kronos#tool#task#ToInfoString(task)
   let task.active     = task.active     ? Date(task.active)     : ''
   let task.done       = task.done       ? Date(task.done)       : ''
   let task.due        = task.due        ? Date(task.due)        : ''
-  let task.lastactive = task.lastactive ? Date(task.lastactive) : ''
+  let task.last_active = task.last_active ? Date(task.last_active) : ''
 
   let task.worktime   = wtimestr
   let task.tags       = join(task.tags, ' ')
@@ -55,12 +55,12 @@ function! kronos#tool#task#ToListString(task)
   let DateDiff = function('kronos#tool#datetime#PrintDiff', [localtime()])
   let Interval = function('kronos#tool#datetime#PrintInterval')
 
-  let task.id         = task.done       ? '-'                       : task.id
-  let task.active     = task.active     ? DateDiff(task.active)     : ''
-  let task.done       = task.done       ? DateDiff(task.done)       : ''
-  let task.due        = task.due        ? DateDiff(task.due)        : ''
-  let task.lastactive = task.lastactive ? DateDiff(task.lastactive) : ''
-  let task.worktime   = task.worktime   ? Interval(task.worktime)   : ''
+  let task.id          = task.done        ? '-'                        : task.id
+  let task.active      = task.active      ? DateDiff(task.active)      : ''
+  let task.done        = task.done        ? DateDiff(task.done)        : ''
+  let task.due         = task.due         ? DateDiff(task.due)         : ''
+  let task.last_active = task.last_active ? DateDiff(task.last_active) : ''
+  let task.worktime    = task.worktime    ? Interval(task.worktime)    : ''
 
   let task.tags = join(task.tags, ' ')
 

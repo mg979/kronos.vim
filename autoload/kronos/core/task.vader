@@ -4,13 +4,13 @@ Before:
 
   let g_task1 = {
     \'id': 1, 'desc': 'test kronos 1', 'tags': ['test', 'vader', 'kronos'],
-    \'due': 1526397300 + (60 * 60 * 24), 'active': 0, 'lastactive': 0,
+    \'due': 1526397300 + (60 * 60 * 24), 'active': 0, 'last_active': 0,
     \'worktime': 0, 'done': 0,
   \}
 
   let g_task2 = {
     \'id': 2, 'desc': 'test kronos 2', 'tags': [], 'due': 0,
-    \'active': 1, 'lastactive': 1526397300, 'worktime': 3600,
+    \'active': 1, 'last_active': 1526397300, 'worktime': 3600,
     \'done': 0,
   \}
 
@@ -59,7 +59,7 @@ Execute (Update):
   let taskupdate = {
     \'id': 1, 'desc': 'test kronos updated',
     \'tags': ['test', 'vader', 'kronos', 'update'], 'due': 1527462654,
-    \'active': 0, 'lastactive': 0, 'worktime': 0, 'done': 0,
+    \'active': 0, 'last_active': 0, 'worktime': 0, 'done': 0,
   \}
 
   call kronos#core#task#Update(g_database, 1, taskupdate)

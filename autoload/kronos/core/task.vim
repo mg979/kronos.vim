@@ -8,6 +8,11 @@ function! kronos#core#task#Create(database, task)
   let newtasks = add(copy(tasks), task)
   call kronos#core#database#Write(a:database, newtasks)
 
+  if g:kronos_sync
+    call kronos#sync#bump_version()
+    call kronos#sync#send({'type': 'create', 'task': task})
+  endif
+
   return task.id
 endfunction
 
@@ -34,6 +39,11 @@ function! kronos#core#task#Update(database, id, task)
 
   let newtasks[index] = copy(a:task)
   call kronos#core#database#Write(a:database, newtasks)
+
+  if g:kronos_sync
+    call kronos#sync#bump_version()
+    call kronos#sync#send({'type': 'update', 'task': newtasks[index]})
+  endif
 endfunction
 
 " ------------------------------------------------------------------- # Delete #
@@ -44,5 +54,9 @@ function! kronos#core#task#Delete(database, id)
 
   call remove(newtasks, index)
   call kronos#core#database#Write(a:database, newtasks)
-endfunction
 
+  if g:kronos_sync
+    call kronos#sync#bump_version()
+    call kronos#sync#send({'type': 'delete', 'task_id': a:id})
+  endif
+endfunction

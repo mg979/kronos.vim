@@ -11,13 +11,13 @@ function! kronos#core#ui#Add(database, dateref, args)
   endfor
 
   let id = kronos#core#task#Create(a:database, {
-    \'desc'      : desc,
-    \'tags'      : tags,
-    \'due'       : due,
-    \'active'    : 0,
-    \'lastactive': 0,
-    \'worktime'  : 0,
-    \'done'      : 0,
+    \'desc': desc,
+    \'tags': tags,
+    \'due': due,
+    \'active': 0,
+    \'last_active': 0,
+    \'worktime': 0,
+    \'done': 0,
   \})
 
   redraw
@@ -97,7 +97,7 @@ function! kronos#core#ui#Stop(database, dateref, id)
 
   let task.worktime += (a:dateref - task.active)
   let task.active = 0
-  let task.lastactive = a:dateref
+  let task.last_active = a:dateref
 
   call kronos#core#task#Update(a:database, a:id, task)
 
@@ -125,7 +125,7 @@ function! kronos#core#ui#Done(database, dateref, id)
   if  task.active
     let task.worktime += (a:dateref - task.active)
     let task.active = 0
-    let task.lastactive = a:dateref
+    let task.last_active = a:dateref
   endif
 
   let task.done = a:dateref
