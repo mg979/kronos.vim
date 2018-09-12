@@ -22,7 +22,8 @@ TABLE OF CONTENTS                                            *kronos-contents*
     - Context ............................................... |kronos-context|
     - Hide done tasks ............................... |kronos-hide-done-tasks|
     - Database ............................................. |kronos-database|
-    - Gist sync ........................................... |kronos-gist-sync|
+    - Sync ..................................................... |kronos-sync|
+    - Sync host ........................................... |kronos-sync-host|
   License ................................................... |kronos-license|
   Bugs ......................................................... |kronos-bugs|
   Contributing ......................................... |kronos-contributing|
@@ -227,27 +228,17 @@ Path to the database file:                                   *kronos-database*
 <
 Default: `<KRONOS_ROOT_DIR>/kronos.db`
 
-Enable Gist {1} sync feature:                               *kronos-gist-sync*
+Enable sync feature:                                             *kronos-sync*
 >
-  g:kronos_gist_sync = <boolean>
+  g:kronos_sync = <boolean>
 <
-This option will synchronize your local database with a secret Gist, so it can
-be used by other clients, or just act as a backup.
-
-The first time you activate this option, you will need to restart Vim, and a
-GitHub token will be prompted. To get one, go to GitHub settings page {2},
-click on "Generate new token", and check "gist" scope:
->
-  Token description: kronos
-  Select scopes
-    [X] gist         Create gists
-<
-This feature requires at least `Vim 8`, with `+job` option. A port to `Neovim`
-is not planed yet, feel free to contribute. 
-
 Default: `0`
-                                                   https://gist.github.com {1}
-                                        https://github.com/settings/tokens {2}
+
+Set sync host:                                              *kronos-sync-host*
+>
+  g:kronos_sync_host = <string>
+<
+Default: `localhost:5000`
 
 ==============================================================================
 LICENSE                                                       *kronos-license*

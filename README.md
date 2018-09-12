@@ -21,7 +21,8 @@ A simple task and time manager for vim.
     * [Context](#context-1)
     * [Hide done tasks](#hide-done-tasks)
     * [Database](#database)
-    * [Gist sync](#gist-sync)
+    * [Sync](#sync)
+    * [Sync host](#sync-host)
   * [License](#license)
   * [Bugs](#bugs)
   * [Contributing](#contributing)
@@ -254,27 +255,25 @@ g:kronos_database = <path>
 
 Default: `<KRONOS_ROOT_DIR>/kronos.db`
 
-### Gist sync
+### Sync
 
-Enable [Gist](https://gist.github.com/) sync feature:
+Enable sync feature:
 
 ```vim
-g:kronos_gist_sync = <boolean>
+g:kronos_sync = <boolean>
 ```
-
-This option will synchronize your local [database](#database) with a secret Gist, so it can be used by other clients, or just act as a backup.
-
-The first time you activate this option, you will need to restart Vim, and a **GitHub token** will be prompted. To get one, [go to this page](https://github.com/settings/tokens), click on **Generate new token**, and check gist scope:
-
-```
-Token description: kronos
-Select scopes
-  [X] gist         Create gists
-```
-
-This feature requires `Vim 8+`, with `+job` option. A port to `Neovim` is not planed yet, feel free to contribute. 
 
 Default: `0`
+
+### Sync host
+
+Set sync host:
+
+```vim
+g:kronos_sync_host = <string>
+```
+
+Default: `localhost:5000`
 
 ## Contributing
 

@@ -22,9 +22,5 @@ function! kronos#core#database#Write(database, tasks)
 
   let data = map(tasksundone + tasksdone, 'string(v:val)')
   call writefile(data, a:database, 's')
-
-  if g:kronos_gist_sync
-    call kronos#hook#gist#Write(join(data, "\n"))
-  endif
 endfunction
 
