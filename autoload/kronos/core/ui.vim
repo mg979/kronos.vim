@@ -23,8 +23,8 @@ function! kronos#core#ui#Add(database, dateref, args)
   let task.id = kronos#core#task#Create(a:database, task)
 
   if g:kronos_sync
-    call kronos#sync#bump_version()
-    call kronos#sync#send({'type': 'create', 'task': task})
+    call kronos#sync#common#bump_version()
+    call kronos#sync#common#send({'type': 'create', 'task': task})
   endif
 
   redraw
@@ -63,8 +63,8 @@ function! kronos#core#ui#Update(database, dateref, args)
   call kronos#core#task#Update(a:database, id, task)
 
   if g:kronos_sync
-    call kronos#sync#bump_version()
-    call kronos#sync#send({'type': 'update', 'task': task})
+    call kronos#sync#common#bump_version()
+    call kronos#sync#common#send({'type': 'update', 'task': task})
   endif
 
   redraw
@@ -82,8 +82,8 @@ function! kronos#core#ui#Delete(database, id)
   call kronos#core#task#Delete(a:database, a:id)
 
   if g:kronos_sync
-    call kronos#sync#bump_version()
-    call kronos#sync#send({'type': 'delete', 'task_id': a:id})
+    call kronos#sync#common#bump_version()
+    call kronos#sync#common#send({'type': 'delete', 'task_id': a:id})
   endif
 
   redraw

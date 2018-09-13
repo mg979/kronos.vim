@@ -1,9 +1,16 @@
 " ------------------------------------------------------------------- # Create #
 
 function! kronos#core#task#Create(database, task)
-  let tasks   = kronos#core#database#Read(a:database)
-  let task    = copy(a:task)
-  let task.id = kronos#tool#task#GenerateId(tasks)
+  let tasks = kronos#core#database#Read(a:database)
+  let task  = copy(a:task)
+
+  if has_key(task, 'id')
+    if len(filter(copy(tasks), 'v:val.id == task.id'))
+      throw 'task-already-exist'
+    endif
+  else
+    let task.id = kronos#tool#task#GenerateId(tasks)
+  endif
 
   let newtasks = add(copy(tasks), task)
   call kronos#core#database#Write(a:database, newtasks)

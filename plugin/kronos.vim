@@ -23,6 +23,6 @@ command! -nargs=* Kronos call kronos#EntryPoint(<q-args>)
 
 if g:kronos_sync
   augroup kronos
-    autocmd VimEnter * call kronos#sync#init()
+    autocmd VimEnter * call kronos#sync#common#init()
   augroup END
 endif
