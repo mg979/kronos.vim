@@ -10,7 +10,7 @@ function! kronos#core#ui#Add(database, dateref, args)
     endif
   endfor
 
-  let id = kronos#core#task#Create(a:database, {
+  let task = {
     \'desc': desc,
     \'tags': tags,
     \'due': due,
@@ -18,10 +18,17 @@ function! kronos#core#ui#Add(database, dateref, args)
     \'last_active': 0,
     \'worktime': 0,
     \'done': 0,
-  \})
+  \}
+
+  let task.id = kronos#core#task#Create(a:database, task)
+
+  if g:kronos_sync
+    call kronos#sync#bump_version()
+    call kronos#sync#send({'type': 'create', 'task': task})
+  endif
 
   redraw
-  let message = printf('Task [%d] added.', id)
+  let message = printf('Task [%d] added.', task.id)
   call kronos#tool#log#Info(message)
 endfunction
 
@@ -55,6 +62,11 @@ function! kronos#core#ui#Update(database, dateref, args)
 
   call kronos#core#task#Update(a:database, id, task)
 
+  if g:kronos_sync
+    call kronos#sync#bump_version()
+    call kronos#sync#send({'type': 'update', 'task': task})
+  endif
+
   redraw
   let message = printf('Task [%d] updated.', id)
   call kronos#tool#log#Info(message)
@@ -68,6 +80,11 @@ function! kronos#core#ui#Delete(database, id)
   if  choice != 'y' | throw 'operation-canceled' | endif
 
   call kronos#core#task#Delete(a:database, a:id)
+
+  if g:kronos_sync
+    call kronos#sync#bump_version()
+    call kronos#sync#send({'type': 'delete', 'task_id': a:id})
+  endif
 
   redraw
   let message = printf('Task [%d] deleted.', a:id)

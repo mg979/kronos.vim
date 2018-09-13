@@ -40,6 +40,7 @@ endfunction
 
 function! s:on_data(id, raw_data, event) dict
   for raw_data in a:raw_data[:-2]
+    if empty(raw_data) | continue | endif
     let data = json_decode(raw_data)
 
     if ! data.success
@@ -67,6 +68,17 @@ function! s:on_data(id, raw_data, event) dict
 
     elseif data.type == 'read-all'
       call kronos#core#database#Write(g:kronos_database, data.tasks)
+
+    elseif data.device_id != s:device_id
+      let s:version = data.version
+
+      if data.type == 'create'
+        call kronos#core#task#Create(g:kronos_database, data.task)
+      elseif data.type == 'update'
+        call kronos#core#task#Update(g:kronos_database, data.task.id, data.task)
+      elseif data.type == 'delete'
+        call kronos#core#task#Delete(g:kronos_database, data.task_id)
+      endif
     endif
 
     let config = [s:user_id, s:device_id, s:version]
