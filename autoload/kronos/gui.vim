@@ -101,7 +101,21 @@ function! kronos#gui#List()
   let tasks   = map(copy(tasks), function('PrintListTask'))
 
   redir => buflist | silent! ls | redir END
-  silent! edit Kronos
+
+  let original_tab = tabpagenr()
+  let cmd = match(buflist, '"Kronos"') >= 0 ? 'edit' : get(g:, 'kronos_wincmd', 'tabedit')
+
+  if cmd == 'tabedit'
+    $tabedit Kronos
+    let t:original_tab = original_tab
+  elseif cmd != 'edit' && len(tabpagebuflist()) > 1
+    99wincmd h
+    execute "silent!" cmd "Kronos"
+    silent! vertical resize 100
+    silent! resize 100
+  else
+    execute "silent!" cmd "Kronos"
+  endif
 
   if match(buflist, '"Kronos"') + 1
     setlocal modifiable
@@ -267,6 +281,18 @@ function! kronos#gui#PrintRow(type, row)
     \copy(columns),
     \'PrintProp(a:row[v:val], widths[v:val])',
   \), '')[:78] . ' '
+endfunction
+
+" --------------------------------------------------------------------- # Quit #
+
+function! kronos#gui#quit()
+  let change_tab = exists('t:original_tab') ? t:original_tab : 0
+  if change_tab && len(tabpagebuflist()) == 1
+    bwipeout!
+    exe "normal!" change_tab."gt"
+  else
+    bwipeout!
+  endif
 endfunction
 
 " ------------------------------------------------------------------ # Helpers #

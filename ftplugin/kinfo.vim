@@ -4,7 +4,7 @@ setlocal nomodifiable
 setlocal nowrap
 setlocal startofline
 
-nnoremap <silent> <buffer> i     :bdelete <cr>
-nnoremap <silent> <buffer> q     :bdelete <cr>
-nnoremap <silent> <buffer> <esc> :bdelete <cr>
+nnoremap <silent> <buffer> i     :call kronos#gui#quit()  <cr>
+nnoremap <silent> <buffer> q     :call kronos#gui#quit()  <cr>
+nnoremap <silent> <buffer> <esc> :call kronos#gui#quit()  <cr>
 

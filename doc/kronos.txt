@@ -227,6 +227,12 @@ Path to the database file:                                   *kronos-database*
 <
 Default: `<KRONOS_ROOT_DIR>/kronos.db`
 
+Where the Kronos buffer will be loaded:                        *kronos-wincmd*
+>
+  g:kronos_wincmd = 'tabedit'
+<
+Should be either 'tabedit', 'vs', 'sp'.
+
 Enable Gist {1} sync feature:                               *kronos-gist-sync*
 >
   g:kronos_gist_sync = <boolean>
