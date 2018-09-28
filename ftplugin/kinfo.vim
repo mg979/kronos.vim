@@ -4,9 +4,11 @@ setlocal nomodifiable
 setlocal nowrap
 setlocal startofline
 
+nnoremap <silent> <buffer> <esc><esc>     <esc>
+nnoremap <silent> <buffer> <nowait> <esc> :call kronos#gui#quit() <cr>
+
 nnoremap <silent> <buffer> i     :call kronos#gui#quit()  <cr>
 nnoremap <silent> <buffer> q     :call kronos#gui#quit()  <cr>
-nnoremap <silent> <buffer> <esc> :call kronos#gui#quit()  <cr>
 nnoremap <silent> <buffer> n     :call kronos#gui#Note(1) <cr>
 nnoremap <silent> <buffer> dn    :call <sid>del_note()    <cr>
 

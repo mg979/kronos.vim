@@ -4,9 +4,12 @@ setlocal modifiable
 setlocal nowrap
 setlocal startofline
 
+nnoremap <silent> <buffer> <esc><esc>     <esc>
+nnoremap <silent> <buffer> <nowait> <esc> :call <sid>save_note() <cr>
+
+
 nnoremap <silent> <buffer> q             :call <sid>save_note()  <cr>
 nnoremap <silent> <buffer> <leader>q     :call <sid>save_note()  <cr>
-nnoremap <silent> <buffer> <esc>         :call <sid>save_note()  <cr>
 nnoremap <silent> <buffer> <leader>w     :call <sid>save_note()  <cr>
 nnoremap <silent> <buffer> dn            :call <sid>del_note()   <cr>
 

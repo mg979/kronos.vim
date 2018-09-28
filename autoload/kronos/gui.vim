@@ -104,7 +104,8 @@ function! kronos#gui#List()
 
   redir => buflist | silent! ls | redir END
 
-  let cmd = match(buflist, '"Kronos"') >= 0 ? 'edit' : get(g:, 'kronos_wincmd', 'tabedit')
+  let cmd = match(buflist, '"Kronos"') >= 0
+        \ ? 'edit' : get(g:, 'kronos_wincmd', 'tabedit')
 
   if cmd == 'tabedit'
     let original_tab = tabpagenr()
