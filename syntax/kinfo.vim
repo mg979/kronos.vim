@@ -18,6 +18,7 @@ function! s:SetSyntax()
 
   syntax match KronosInfoSeparator /|/
   syntax match KronosInfoHead      /.*\%1l/ contains=KronosInfoSeparator
+  syntax match KronosInfoNoteHead  '^## Note:'
 
   execute 'syntax keyword KronosInfoKey contained ' . join(values(labels), ' ')
 endfunction
@@ -34,6 +35,7 @@ highlight default link KronosInfoLastactive   String
 highlight default link KronosInfoSeparator    VertSplit
 highlight default link KronosInfoTags         Tag
 highlight default link KronosInfoWorktime     String
+highlight default link KronosInfoNoteHead     Comment
 
 highlight KronosInfoHead term=bold,underline cterm=bold,underline
 

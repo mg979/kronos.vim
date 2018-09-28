@@ -83,7 +83,9 @@ function! kronos#gui#Info()
   silent! bdelete KronosInfo
   silent! botright new KronosInfo
 
+  let b:task = kronos#core#task#Read(g:kronos_database, id)
   call append(0, headers + keys)
+  call PrintNote(task)
   normal! ddgg
 
   setlocal filetype=kinfo
@@ -102,10 +104,10 @@ function! kronos#gui#List()
 
   redir => buflist | silent! ls | redir END
 
-  let original_tab = tabpagenr()
   let cmd = match(buflist, '"Kronos"') >= 0 ? 'edit' : get(g:, 'kronos_wincmd', 'tabedit')
 
   if cmd == 'tabedit'
+    let original_tab = tabpagenr()
     $tabedit Kronos
     let t:original_tab = original_tab
   elseif cmd != 'edit' && len(tabpagebuflist()) > 1
@@ -126,6 +128,32 @@ function! kronos#gui#List()
   execute '$d'
   call setpos('.', prevpos)
   setlocal filetype=klist
+endfunction
+
+" --------------------------------------------------------------------- # Note #
+
+function! kronos#gui#Note(from_info_view)
+  let task = b:task
+  let cmd = a:from_info_view ? 'vs' : 'bel sp'
+  execute "silent!" cmd "KronosNote"
+  call PrintNote(task, 1)
+  normal! gg2dd}j
+  setlocal filetype=knote
+  let b:from_info_view = a:from_info_view
+endfunction
+
+function! kronos#gui#NoteFromList()
+  try
+    let id = GetFocusedTaskId()
+    let b:task = kronos#core#task#Read(g:kronos_database, id)
+    call kronos#gui#Note(0)
+  catch 'task-not-found'
+    return kronos#tool#log#Error('Task not found.')
+  catch 'operation-canceled'
+    return kronos#tool#log#Error('Operation canceled.')
+  catch
+    return kronos#tool#log#Error('Error while creating note.')
+  endtry
 endfunction
 
 " ------------------------------------------------------------------- # Update #
@@ -330,3 +358,17 @@ function! GetFocusedTaskId()
   return get(tasks, index).id
 endfunction
 
+function! PrintNote(task, ...)
+  let note = get(a:task, 'note', [])
+  let note = match(note, '\w') >= 0 ? note : []
+  if !empty(note) || a:0
+    call append(line('$'), '')
+    call append(line('$'), "## Note:")
+    if empty(note)
+      call append(line('$'), '')
+    endif
+    for line in note
+      call append(line('$'), line)
+    endfor
+  endif
+endfunction
