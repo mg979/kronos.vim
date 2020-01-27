@@ -32,7 +32,7 @@ highlight default link KronosInfoDue          String
 highlight default link KronosInfoId           Identifier
 highlight default link KronosInfoKey          Comment
 highlight default link KronosInfoLastactive   String
-highlight default link KronosInfoSeparator    VertSplit
+highlight default link KronosInfoSeparator    NonText
 highlight default link KronosInfoTags         Tag
 highlight default link KronosInfoWorktime     String
 highlight default link KronosInfoNoteHead     Comment

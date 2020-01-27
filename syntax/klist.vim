@@ -28,11 +28,11 @@ call s:SetSyntax()
 
 highlight default link KronosActive     String
 highlight default link KronosDesc       Comment
-highlight default link KronosDone       VertSplit
+highlight default link KronosDone       NonText
 highlight default link KronosDue        Structure
 highlight default link KronosDueAlert   Error
 highlight default link KronosId         Identifier
-highlight default link KronosSeparator  VertSplit
+highlight default link KronosSeparator  NonText
 highlight default link KronosTags       Tag
 
 highlight KronosHead term=bold,underline cterm=bold,underline

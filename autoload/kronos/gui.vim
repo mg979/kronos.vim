@@ -108,9 +108,7 @@ function! kronos#gui#List()
         \ ? 'edit' : get(g:, 'kronos_wincmd', 'tabedit')
 
   if cmd == 'tabedit'
-    let original_tab = tabpagenr()
-    $tabedit Kronos
-    let t:original_tab = original_tab
+    exe (tabpagenr()-1).'tabedit Kronos'
   elseif cmd != 'edit' && len(tabpagebuflist()) > 1
     99wincmd h
     execute "silent!" cmd "Kronos"
@@ -310,18 +308,6 @@ function! kronos#gui#PrintRow(type, row)
     \copy(columns),
     \'PrintProp(a:row[v:val], widths[v:val])',
   \), '')[:78] . ' '
-endfunction
-
-" --------------------------------------------------------------------- # Quit #
-
-function! kronos#gui#quit()
-  let change_tab = exists('t:original_tab') ? t:original_tab : 0
-  if change_tab && len(tabpagebuflist()) == 1
-    bwipeout!
-    exe "normal!" change_tab."gt"
-  else
-    bwipeout!
-  endif
 endfunction
 
 " ------------------------------------------------------------------ # Helpers #

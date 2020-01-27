@@ -1,16 +1,16 @@
-setlocal buftype=nofile
+setlocal buftype=nofile bufhidden=wipe
 setlocal cursorline
 setlocal nomodifiable
 setlocal nowrap
 setlocal startofline
 
 nnoremap <silent> <buffer> <esc><esc>     <esc>
-nnoremap <silent> <buffer> <nowait> <esc> :call kronos#gui#quit() <cr>
+nnoremap <silent> <buffer> <nowait> <esc> :bwipeout!<cr>
 
-nnoremap <silent> <buffer> i     :call kronos#gui#quit()  <cr>
-nnoremap <silent> <buffer> q     :call kronos#gui#quit()  <cr>
-nnoremap <silent> <buffer> n     :call kronos#gui#Note(1) <cr>
-nnoremap <silent> <buffer> dn    :call <sid>del_note()    <cr>
+nnoremap <silent> <buffer> i     :bwipeout!<cr>
+nnoremap <silent> <buffer> q     :bwipeout!<cr>
+nnoremap <silent> <buffer> n     :call kronos#gui#Note(1)<cr>
+nnoremap <silent> <buffer> dn    :call <sid>del_note()<cr>
 
 function! s:del_note()
   setlocal modifiable

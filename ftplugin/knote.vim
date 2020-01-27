@@ -1,4 +1,4 @@
-setlocal buftype=nofile
+setlocal buftype=nofile bufhidden=wipe
 setlocal cursorline
 setlocal modifiable
 setlocal nowrap
