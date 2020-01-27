@@ -4,6 +4,16 @@ setlocal nomodifiable
 setlocal nowrap
 setlocal startofline
 
+if exists('g:loaded_xtabline')
+  let opts = {'name': 'Kronos', 'special': 1,
+        \     'icon': g:xtabline_settings.icons.arrow}
+  call xtabline#buffer#set(bufnr(''), opts)
+  if len(tabpagebuflist()) == 1
+    call xtabline#tab#lock(tabpagenr(), [bufnr('')],
+          \{'name': 'Kronos', 'icon': g:xtabline_settings.icons.arrow})
+  endif
+endif
+
 nnoremap <silent> <buffer> <esc><esc>     <esc>
 nnoremap <silent> <buffer> <nowait> <esc> :bwipeout!<cr>
 
